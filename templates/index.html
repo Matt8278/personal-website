@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <h1 class="display-4">你好，我是 MINGDA ZHANG</h1>
+        <p class="lead">法律硕士 | 商业顾问 | 教育工作者</p>
+
+        <div class="mb-4">
+            <span class="badge bg-primary me-2">法律研究</span>
+            <span class="badge bg-success me-2">商业咨询</span>
+            <span class="badge bg-danger me-2">项目管理</span>
+            <span class="badge bg-warning me-2">Python</span>
+        </div>
+
+        <a href="{{ url_for('projects.projects') }}" class="btn btn-primary me-2">查看作品集</a>
+        <a href="{{ url_for('about.about') }}" class="btn btn-outline-primary">了解更多</a>
+    </div>
+</div>
+{% endblock %}

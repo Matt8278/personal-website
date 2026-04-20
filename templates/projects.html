@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="d-flex align-items-center justify-content-between mb-4">
+  <div>
+    <h1 class="mb-1">作品集</h1>
+    <div class="text-muted">展示我最近的项目与实践</div>
+  </div>
+  <a class="btn btn-outline-dark" href="{{ url_for('main.index') }}">返回首页</a>
+</div>
+
+{% if projects %}
+  <div class="row g-4">
+    {% for project in projects %}
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm">
+
+          {% if project.image_url %}
+            <img src="{{ project.image_url }}" class="card-img-top" alt="{{ project.title }}">
+          {% else %}
+            <div class="bg-light d-flex align-items-center justify-content-center" style="height: 180px;">
+              <span class="text-muted">No Image</span>
+            </div>
+          {% endif %}
+
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">{{ project.title }}</h5>
+
+            <p class="card-text text-muted" style="min-height: 72px;">
+              {{ project.description }}
+            </p>
+
+            {% if project.tags %}
+              <div class="mb-3">
+                {% for t in project.get_tags_list() %}
+                  <span class="badge bg-secondary me-1 mb-1">{{ t.strip() }}</span>
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            <div class="mt-auto">
+              <!-- 先做成可点的详情页（你已经在做 project_detail.html 了） -->
+              <a class="btn btn-primary w-100"
+                 href="{{ url_for('projects.project_detail', project_id=project.id) }}">
+                查看详情
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="alert alert-info">
+    暂无项目数据。你可以先插入几条测试数据。
+  </div>
+{% endif %}
+{% endblock %}
